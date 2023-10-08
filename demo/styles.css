@@ -1,0 +1,21 @@
+/**
+ * This file is part of the "ro-crate2html" library
+ * Copyright 2023 Nicolas CARPi @ Deltablot
+ * License MIT
+ * https://github.com/deltablot/malle
+ */
+:root {
+    --main-bg: #f4f6f7;
+    --border: #cdcdcd;
+}
+
+body {
+    background-color: var(--main-bg);
+    padding-left: 2vw;
+    color: #444;
+}
+
+.ro-crate2htmlKey {
+    font-weight: bold;
+    margin-right: 1em;
+}

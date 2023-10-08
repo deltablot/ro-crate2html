@@ -1,0 +1,38 @@
+{
+  "name": "@deltablot/ro-crate2html",
+  "version": "0.1.0",
+  "description": "Translate RO-Crate JSON-LD into HTML",
+  "main": "dist/main.js",
+  "typings": "dist/main.d.ts",
+  "repository": "https://github.com/deltablot/ro-crate2html",
+  "author": "Nicolas CARPi @ Deltablot>",
+  "license": "MIT",
+  "private": false,
+  "files": [
+    "dist/*.js",
+    "dist/*.js.map",
+    "dist/*.d.ts"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src",
+    "dev-server": "docker run --rm -it --name ro-crate2html -p 4848:80 -v $(pwd):/usr/share/nginx/html:ro -d nginx:stable-alpine",
+    "pre-commit": "npm run lint && npm run test",
+    "stop-dev": "docker stop ro-crate2html",
+    "test": "jest",
+    "watch": "tsc --watch"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.5.2",
+    "@typescript-eslint/eslint-plugin": "^5.5.0",
+    "@typescript-eslint/parser": "^5.5.0",
+    "eslint": "^8.23.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-n": "^15.2.5",
+    "eslint-plugin-promise": "^6.0.0",
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.5",
+    "typescript": "^4.9.5"
+  }
+}
