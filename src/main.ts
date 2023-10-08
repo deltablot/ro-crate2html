@@ -8,6 +8,10 @@
 export class Builder {
   input: object;
 
+  _isResolvableLocally(targetId: string): boolean {
+    return (typeof this._findById(targetId)) !== 'undefined';
+  }
+
   _findById(targetId: string): object {
     const graph = this.input['@graph'];
     if (typeof graph === 'undefined') {
@@ -49,9 +53,35 @@ export class Builder {
 
   _obj2html(node: object): HTMLUListElement {
     const list = document.createElement('ul');
+    if (typeof node === 'undefined') {
+      console.error('Could not find node!');
+      return list;
+    }
     for (const [key, value] of Object.entries(node)) {
       if (typeof value === 'string') {
         list.appendChild(this._string2li(key, value));
+        continue;
+      }
+      if (['author', 'comment', 'mentions', 'hasPart'].includes(key)) {
+        const details = document.createElement('details');
+        const summary = document.createElement('summary');
+        summary.textContent = key;
+        details.appendChild(summary);
+        list.appendChild(details);
+
+        if (Array.isArray(value)) {
+          value.forEach(part => {
+            const subdetails = document.createElement('details');
+            const subsummary = document.createElement('summary');
+            subsummary.textContent = part['@id'];
+            subdetails.appendChild(subsummary);
+            subdetails.appendChild(this._obj2html(this._findById(part['@id'])));
+            details.appendChild(subdetails);
+          });
+          continue;
+        } else {
+          details.appendChild(this._obj2html(this._findById(value['@id'])));
+        }
         continue;
       }
       if (Array.isArray(value)) {

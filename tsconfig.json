@@ -4,6 +4,7 @@
     "module": "es6",
     "removeComments": true,
     "declaration": true,
+    "lib": ["es2017", "dom"],
     "sourceMap": true,
     "target": "ES6",
     "moduleResolution": "node"
