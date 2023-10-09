@@ -8,10 +8,6 @@
 export class Builder {
   input: object;
 
-  _isResolvableLocally(targetId: string): boolean {
-    return (typeof this._findById(targetId)) !== 'undefined';
-  }
-
   _findById(targetId: string): object {
     const graph = this.input['@graph'];
     if (typeof graph === 'undefined') {
